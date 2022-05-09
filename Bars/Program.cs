@@ -15,6 +15,7 @@ namespace Bars
         internal static int barsn = 2;
         internal static ushort barsp = 1;
         internal static int level = 1;
+        internal static int levelcn = 100;
         internal static int levelp = 1;
         internal static int leveln = 2;
         static void Main(string[] args)
@@ -27,8 +28,14 @@ namespace Bars
                 Console.WriteLine("Multipilier:" + levelp);
                 for (int i = 0; i < barsp; i++)
                 {
-                    Points += bars[i].BarTick();
-                    level = (tPoints / 100) + 1;
+                    int get = bars[i].BarTick();
+                    Points += get;
+                    tPoints += get;
+                    if(tPoints > levelcn)
+                    {
+                        level++;
+                        levelcn *= 2;
+                    }
                     if(Points > barsn)
                     {
                         Points -= barsn;
@@ -39,10 +46,10 @@ namespace Bars
                     {
                         Points -= leveln;
                         leveln *= 2;
-                        level++;
+                        levelp++;
                     }
-                    Thread.Sleep(25);
                 }
+                Thread.Sleep(25);
                 Console.Clear();
             }
         }

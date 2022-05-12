@@ -11,6 +11,7 @@ namespace Bars
         internal static BarVeryHard[] barsVH = new BarVeryHard[(ushort.MaxValue - 100)];
         internal static BarExtreme[] barsE = new BarExtreme[(ushort.MaxValue - 100)];
         internal static BarInsane[] barsI = new BarInsane[(ushort.MaxValue - 100)];
+        internal static item[] inventory = new item[6];
         internal static decimal Points = 1;
         internal static decimal tPoints = 1;
         internal static decimal barsn = 2;
@@ -19,6 +20,8 @@ namespace Bars
         internal static decimal levelcn = 100;
         internal static decimal levelp = 1;
         internal static decimal leveln = 2;
+        internal static byte speedboost = 1;
+        internal static byte resourceboost = 1;
         internal static bool debug = false;
         static void Main()
         {
@@ -477,6 +480,28 @@ namespace Bars
                 Console.Clear();
             }
         }
+        internal static void WriteInventory()
+        {
+            speedboost = 1;
+            resourceboost = 1;
+            for(int i = inventory.Length;i >= 0; i--)
+            {
+                if(inventory[i].type == 0)
+                {
+                    Console.WriteLine(Properties.Resources.slot);
+                }
+                if (inventory[i].type == 1)
+                {
+                    Console.WriteLine(Properties.Resources.speedslot);
+                    speedboost++;
+                }
+                if (inventory[i].type == 2)
+                {
+                    Console.WriteLine(Properties.Resources.collection);
+                    resourceboost++;
+                }
+            }
+        }
     }
     internal struct BarNormal
     {
@@ -500,7 +525,7 @@ namespace Bars
                 Console.Write(" ");
             }
             Console.Write("]" + (i + 1 + " / 100\n"));
-            i++;
+            i += Program.speedboost;
             return 0;
         }
     }
@@ -526,7 +551,7 @@ namespace Bars
                 Console.Write(" ");
             }
             Console.Write("]" + (i + 1 + " / 150\n"));
-            i++;
+            i += Program.speedboost;
             return 0;
         }
     }
@@ -538,7 +563,7 @@ namespace Bars
             if (i >= 150)
             {
                 i = 0;
-                return (Program.levelp * Program.level) / 2;
+                return (Program.levelp * Program.level * Program.resourceboost) / 2;
             }
             decimal written = 0;
             Console.Write("[");
@@ -552,7 +577,7 @@ namespace Bars
                 Console.Write(" ");
             }
             Console.Write("]" + (i + 1 + " / 150\n"));
-            i++;
+            i += Program.speedboost;
             return 0;
         }
     }
@@ -564,7 +589,7 @@ namespace Bars
             if (i >= 250)
             {
                 i = 0;
-                return (Program.levelp * Program.level) / 2;
+                return (Program.level * Program.resourceboost * Program.level) / 2;
             }
             decimal written = 0;
             Console.Write("[");
@@ -578,7 +603,7 @@ namespace Bars
                 Console.Write(" ");
             }
             Console.Write("]" + (i + 1 + " / 250\n"));
-            i++;
+            i += Program.speedboost;
             return 0;
         }
     }
@@ -590,7 +615,7 @@ namespace Bars
             if (i >= 300)
             {
                 i = 0;
-                return (Program.levelp * Program.level) / 4;
+                return (Program.levelp * Program.resourceboost * Program.level) / 4;
             }
             decimal written = 0;
             Console.Write("[");
@@ -604,7 +629,7 @@ namespace Bars
                 Console.Write(" ");
             }
             Console.Write("]" + (i + 1 + " / 300\n"));
-            i++;
+            i += Program.speedboost;
             return 0;
         }
     }
@@ -616,7 +641,7 @@ namespace Bars
             if (i >= 500)
             {
                 i = 0;
-                return (Program.levelp * Program.level) / 8;
+                return (Program.levelp * Program.resourceboost * Program.level) / 8;
             }
             decimal written = 0;
             Console.Write("[");
@@ -630,8 +655,12 @@ namespace Bars
                 Console.Write(" ");
             }
             Console.Write("]" + (i + 1 + " / 500\n"));
-            i++;
+            i+=Program.speedboost;
             return 0;
         }
+    }
+    internal struct item
+    {
+        internal byte type;
     }
 }

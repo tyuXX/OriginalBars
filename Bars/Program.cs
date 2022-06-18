@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 
 namespace Bars
@@ -14,10 +15,8 @@ namespace Bars
         internal static item[] inventory = new item[6];
         internal static decimal Points = 1;
         internal static decimal tPoints = 1;
-        internal static decimal barsn = 2;
         internal static ushort barsp = 1;
         internal static decimal level = 1;
-        internal static decimal levelcn = 100;
         internal static decimal levelp = 1;
         internal static decimal leveln = 2;
         internal static byte speedboost = 1;
@@ -34,31 +33,31 @@ namespace Bars
             {
                 AutoMode();
             }
-            if (option == ConsoleKey.D2)
+            else if (option == ConsoleKey.D2)
             {
                 NormalMode();
             }
-            if (option == ConsoleKey.D3)
+            else if (option == ConsoleKey.D3)
             {
                 MediumMode();
             }
-            if (option == ConsoleKey.D4)
+            else if (option == ConsoleKey.D4)
             {
                 HardMode();
             }
-            if (option == ConsoleKey.D5)
+            else if (option == ConsoleKey.D5)
             {
                 VeryHardMode();
             }
-            if (option == ConsoleKey.D6)
+            else if (option == ConsoleKey.D6)
             {
                 ExtremeMode();
             }
-            if (option == ConsoleKey.D7)
+            else if (option == ConsoleKey.D7)
             {
                 InsaneMode();
             }
-            if(option == ConsoleKey.Insert)
+            else if(option == ConsoleKey.Insert)
             {
                 debug = true;
                 Console.Clear();
@@ -66,9 +65,13 @@ namespace Bars
                 Thread.Sleep(1000);
                 Main();
             }
+            else
+            {
+                Main();
+            }
         }
 
-        private static void InsaneMode()
+        internal static void InsaneMode()
         {
             while (!Console.KeyAvailable)
             {
@@ -80,10 +83,9 @@ namespace Bars
                     decimal get = barsI[i].BarTick();
                     Points += get;
                     tPoints += get;
-                    if (tPoints > levelcn)
+                    if (tPoints > (level * 100))
                     {
                         level++;
-                        levelcn *= 2;
                     }
                 }
                 Thread.Sleep(25);
@@ -93,7 +95,7 @@ namespace Bars
             {
                 Console.Clear();
                 Console.WriteLine("Points:" + Points);
-                Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + barsn + "-Points\nCurrent:" + barsp);
+                Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + (barsp * 4) + "-Points\nCurrent:" + barsp);
                 ConsoleKey option = Console.ReadKey(true).Key;
                 if (option == ConsoleKey.D1)
                 {
@@ -113,10 +115,9 @@ namespace Bars
                 }
                 if (option == ConsoleKey.D2)
                 {
-                    if (Points >= barsn)
+                    if (Points >= (barsp * 4))
                     {
-                        Points -= barsn;
-                        barsn *= 2;
+                        Points -= (barsp * 4);
                         barsp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Bar.");
@@ -131,7 +132,7 @@ namespace Bars
             InsaneMode();
         }
 
-        private static void ExtremeMode()
+        internal static void ExtremeMode()
         {
             while (!Console.KeyAvailable)
             {
@@ -143,10 +144,9 @@ namespace Bars
                     decimal get = barsE[i].BarTick();
                     Points += get;
                     tPoints += get;
-                    if (tPoints > levelcn)
+                    if (tPoints > (level * 100))
                     {
                         level++;
-                        levelcn *= 2;
                     }
                 }
                 Thread.Sleep(25);
@@ -156,7 +156,7 @@ namespace Bars
             {
                 Console.Clear();
                 Console.WriteLine("Points:" + Points);
-                Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + barsn + "-Points\nCurrent:" + barsp);
+                Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + (barsp * 4) + "-Points\nCurrent:" + barsp);
                 ConsoleKey option = Console.ReadKey(true).Key;
                 if (option == ConsoleKey.D1)
                 {
@@ -176,10 +176,9 @@ namespace Bars
                 }
                 if (option == ConsoleKey.D2)
                 {
-                    if (Points >= barsn)
+                    if (Points >= (barsp * 4))
                     {
-                        Points -= barsn;
-                        barsn *= 2;
+                        Points -= (barsp * 4);
                         barsp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Bar.");
@@ -194,7 +193,7 @@ namespace Bars
             ExtremeMode();
         }
 
-        private static void VeryHardMode()
+        internal static void VeryHardMode()
         {
             while (!Console.KeyAvailable)
             {
@@ -206,10 +205,9 @@ namespace Bars
                     decimal get = barsVH[i].BarTick();
                     Points += get;
                     tPoints += get;
-                    if (tPoints > levelcn)
+                    if (tPoints > (level * 100))
                     {
                         level++;
-                        levelcn *= 2;
                     }
                 }
                 Thread.Sleep(25);
@@ -219,7 +217,7 @@ namespace Bars
             {
                 Console.Clear();
                 Console.WriteLine("Points:" + Points);
-                Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + barsn + "-Points\nCurrent:" + barsp);
+                Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + (barsp * 4) + "-Points\nCurrent:" + barsp);
                 ConsoleKey option = Console.ReadKey(true).Key;
                 if (option == ConsoleKey.D1)
                 {
@@ -239,10 +237,9 @@ namespace Bars
                 }
                 if (option == ConsoleKey.D2)
                 {
-                    if (Points >= barsn)
+                    if (Points >= (barsp * 4))
                     {
-                        Points -= barsn;
-                        barsn *= 2;
+                        Points -= (barsp * 4);
                         barsp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Bar.");
@@ -257,7 +254,7 @@ namespace Bars
             VeryHardMode();
         }
 
-        private static void HardMode()
+        internal static void HardMode()
         {
             while (!Console.KeyAvailable)
             {
@@ -269,10 +266,9 @@ namespace Bars
                     decimal get = barsH[i].BarTick();
                     Points += get;
                     tPoints += get;
-                    if (tPoints > levelcn)
+                    if (tPoints > (level * 100))
                     {
                         level++;
-                        levelcn *= 2;
                     }
                 }
                 Thread.Sleep(25);
@@ -282,7 +278,7 @@ namespace Bars
             {
                 Console.Clear();
                 Console.WriteLine("Points:" + Points);
-                Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + barsn + "-Points\nCurrent:" + barsp);
+                Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + (barsp * 4) + "-Points\nCurrent:" + barsp);
                 ConsoleKey option = Console.ReadKey(true).Key;
                 if (option == ConsoleKey.D1)
                 {
@@ -302,10 +298,9 @@ namespace Bars
                 }
                 if (option == ConsoleKey.D2)
                 {
-                    if (Points >= barsn)
+                    if (Points >= (barsp * 4))
                     {
-                        Points -= barsn;
-                        barsn *= 2;
+                        Points -= (barsp * 4);
                         barsp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Bar.");
@@ -320,7 +315,7 @@ namespace Bars
             HardMode();
         }
 
-        private static void MediumMode()
+        internal static void MediumMode()
         {
             while (!Console.KeyAvailable)
             {
@@ -332,10 +327,9 @@ namespace Bars
                     decimal get = barsM[i].BarTick();
                     Points += get;
                     tPoints += get;
-                    if (tPoints > levelcn)
+                    if (tPoints > (level * 100))
                     {
                         level++;
-                        levelcn *= 2;
                     }
                 }
                 Thread.Sleep(25);
@@ -345,7 +339,7 @@ namespace Bars
             {
                 Console.Clear();
                 Console.WriteLine("Points:" + Points);
-                Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + barsn + "-Points\nCurrent:" + barsp);
+                Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + (barsp * 4) + "-Points\nCurrent:" + barsp);
                 ConsoleKey option = Console.ReadKey(true).Key;
                 if (option == ConsoleKey.D1)
                 {
@@ -365,10 +359,9 @@ namespace Bars
                 }
                 if (option == ConsoleKey.D2)
                 {
-                    if (Points >= barsn)
+                    if (Points >= (barsp * 4))
                     {
-                        Points -= barsn;
-                        barsn *= 2;
+                        Points -= (barsp * 4);
                         barsp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Bar.");
@@ -383,7 +376,7 @@ namespace Bars
             MediumMode();
         }
 
-        private static void NormalMode()
+        internal static void NormalMode()
         {
             while (!Console.KeyAvailable)
             {
@@ -395,10 +388,9 @@ namespace Bars
                     decimal get = barsN[i].BarTick();
                     Points += get;
                     tPoints += get;
-                    if (tPoints > levelcn)
+                    if (tPoints > (level * 100))
                     {
                         level++;
-                        levelcn *= 2;
                     }
                 }
                 Thread.Sleep(25);
@@ -408,7 +400,7 @@ namespace Bars
             {
                 Console.Clear();
                 Console.WriteLine("Points:" + Points);
-                Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + barsn + "-Points\nCurrent:" + barsp);
+                Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + (barsp * 4) + "-Points\nCurrent:" + barsp);
                 ConsoleKey option = Console.ReadKey(true).Key;
                 if (option == ConsoleKey.D1)
                 {
@@ -428,10 +420,9 @@ namespace Bars
                 }
                 if (option == ConsoleKey.D2)
                 {
-                    if (Points >= barsn)
+                    if (Points >= (barsp * 4))
                     {
-                        Points -= barsn;
-                        barsn *= 2;
+                        Points -= (barsp * 4);
                         barsp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Bar.");
@@ -446,7 +437,7 @@ namespace Bars
             NormalMode();
         }
 
-        private static void AutoMode()
+        internal static void AutoMode()
         {
             while (true)
             {
@@ -458,15 +449,13 @@ namespace Bars
                     decimal get = barsN[i].BarTick();
                     Points += get;
                     tPoints += get;
-                    if (tPoints >= levelcn)
+                    if (tPoints >= (level * 100))
                     {
                         level++;
-                        levelcn *= 2;
                     }
-                    if (Points >= barsn)
+                    if (Points >= (barsp * 4))
                     {
-                        Points -= barsn;
-                        barsn *= 2;
+                        Points -= (barsp * 4);
                         barsp++;
                     }
                     if (Points >= leveln)

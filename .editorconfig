@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0649: 'item.type' alanı hiçbir zaman atanmaz ve her zaman varsayılan 0 değerine sahip olur
+dotnet_diagnostic.CS0649.severity = none

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Numerics;
 using System.Threading;
 
 namespace Bars
@@ -13,15 +14,16 @@ namespace Bars
         internal static BarExtreme[] barsE = new BarExtreme[(ushort.MaxValue - 100)];
         internal static BarInsane[] barsI = new BarInsane[(ushort.MaxValue - 100)];
         internal static item[] inventory = new item[6];
-        internal static decimal Points = 1;
-        internal static decimal tPoints = 1;
+        internal static BigInteger Points = 1;
+        internal static BigInteger tPoints = 1;
         internal static ushort barsp = 1;
-        internal static decimal level = 1;
-        internal static decimal levelp = 1;
-        internal static decimal leveln = 2;
+        internal static BigInteger level = 1;
+        internal static BigInteger levelp = 1;
+        internal static BigInteger leveln = 10;
         internal static byte speedboost = 1;
         internal static byte resourceboost = 1;
         internal static bool debug = false;
+        internal static bool baruapdate = true;
         static void Main()
         {
             Console.Title = "Bars";
@@ -80,7 +82,7 @@ namespace Bars
                 Console.WriteLine("Multipilier:" + levelp);
                 for (int i = 0; i < barsp; i++)
                 {
-                    decimal get = barsI[i].BarTick();
+                    BigInteger get = barsI[i].BarTick();
                     Points += get;
                     tPoints += get;
                     if (tPoints > (level * 100))
@@ -93,6 +95,8 @@ namespace Bars
             }
             while (Console.ReadKey(true).Key == ConsoleKey.S)
             {
+                baruapdate = false;
+                Thread.Sleep(500);
                 Console.Clear();
                 Console.WriteLine("Points:" + Points);
                 Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + (barsp * 4) + "-Points\nCurrent:" + barsp);
@@ -102,15 +106,17 @@ namespace Bars
                     if (Points >= leveln)
                     {
                         Points -= leveln;
-                        leveln *= 2;
+                        leveln *= 4;
                         levelp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Multipilier.");
+                        baruapdate = true;
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("Not enough money.");
+                        baruapdate = true;
                     }
                 }
                 if (option == ConsoleKey.D2)
@@ -121,11 +127,13 @@ namespace Bars
                         barsp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Bar.");
+                        baruapdate = true;
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("Not enough money.");
+                        baruapdate = true;
                     }
                 }
             }
@@ -141,7 +149,7 @@ namespace Bars
                 Console.WriteLine("Multipilier:" + levelp);
                 for (int i = 0; i < barsp; i++)
                 {
-                    decimal get = barsE[i].BarTick();
+                    BigInteger get = barsE[i].BarTick();
                     Points += get;
                     tPoints += get;
                     if (tPoints > (level * 100))
@@ -154,6 +162,8 @@ namespace Bars
             }
             while (Console.ReadKey(true).Key == ConsoleKey.S)
             {
+                baruapdate = false;
+                Thread.Sleep(500);
                 Console.Clear();
                 Console.WriteLine("Points:" + Points);
                 Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + (barsp * 4) + "-Points\nCurrent:" + barsp);
@@ -163,15 +173,17 @@ namespace Bars
                     if (Points >= leveln)
                     {
                         Points -= leveln;
-                        leveln *= 2;
+                        leveln *= 4;
                         levelp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Multipilier.");
+                        baruapdate = true;
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("Not enough money.");
+                        baruapdate = true;
                     }
                 }
                 if (option == ConsoleKey.D2)
@@ -182,11 +194,13 @@ namespace Bars
                         barsp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Bar.");
+                        baruapdate = true;
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("Not enough money.");
+                        baruapdate = true;
                     }
                 }
             }
@@ -202,7 +216,7 @@ namespace Bars
                 Console.WriteLine("Multipilier:" + levelp);
                 for (int i = 0; i < barsp; i++)
                 {
-                    decimal get = barsVH[i].BarTick();
+                    BigInteger get = barsVH[i].BarTick();
                     Points += get;
                     tPoints += get;
                     if (tPoints > (level * 100))
@@ -215,6 +229,8 @@ namespace Bars
             }
             while (Console.ReadKey(true).Key == ConsoleKey.S)
             {
+                baruapdate = false;
+                Thread.Sleep(500);
                 Console.Clear();
                 Console.WriteLine("Points:" + Points);
                 Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + (barsp * 4) + "-Points\nCurrent:" + barsp);
@@ -224,15 +240,17 @@ namespace Bars
                     if (Points >= leveln)
                     {
                         Points -= leveln;
-                        leveln *= 2;
+                        leveln *= 4;
                         levelp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Multipilier.");
+                        baruapdate = true;
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("Not enough money.");
+                        baruapdate = true;
                     }
                 }
                 if (option == ConsoleKey.D2)
@@ -243,11 +261,13 @@ namespace Bars
                         barsp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Bar.");
+                        baruapdate = true;
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("Not enough money.");
+                        baruapdate = true;
                     }
                 }
             }
@@ -263,7 +283,7 @@ namespace Bars
                 Console.WriteLine("Multipilier:" + levelp);
                 for (int i = 0; i < barsp; i++)
                 {
-                    decimal get = barsH[i].BarTick();
+                    BigInteger get = barsH[i].BarTick();
                     Points += get;
                     tPoints += get;
                     if (tPoints > (level * 100))
@@ -276,6 +296,8 @@ namespace Bars
             }
             while (Console.ReadKey(true).Key == ConsoleKey.S)
             {
+                baruapdate = false;
+                Thread.Sleep(500);
                 Console.Clear();
                 Console.WriteLine("Points:" + Points);
                 Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + (barsp * 4) + "-Points\nCurrent:" + barsp);
@@ -285,15 +307,17 @@ namespace Bars
                     if (Points >= leveln)
                     {
                         Points -= leveln;
-                        leveln *= 2;
+                        leveln *= 4;
                         levelp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Multipilier.");
+                        baruapdate = true;
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("Not enough money.");
+                        baruapdate = true;
                     }
                 }
                 if (option == ConsoleKey.D2)
@@ -304,11 +328,13 @@ namespace Bars
                         barsp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Bar.");
+                        baruapdate = true;
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("Not enough money.");
+                        baruapdate = true;
                     }
                 }
             }
@@ -324,7 +350,7 @@ namespace Bars
                 Console.WriteLine("Multipilier:" + levelp);
                 for (int i = 0; i < barsp; i++)
                 {
-                    decimal get = barsM[i].BarTick();
+                    BigInteger get = barsM[i].BarTick();
                     Points += get;
                     tPoints += get;
                     if (tPoints > (level * 100))
@@ -337,6 +363,8 @@ namespace Bars
             }
             while (Console.ReadKey(true).Key == ConsoleKey.S)
             {
+                baruapdate = false;
+                Thread.Sleep(500);
                 Console.Clear();
                 Console.WriteLine("Points:" + Points);
                 Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + (barsp * 4) + "-Points\nCurrent:" + barsp);
@@ -346,15 +374,17 @@ namespace Bars
                     if (Points >= leveln)
                     {
                         Points -= leveln;
-                        leveln *= 2;
+                        leveln *= 4;
                         levelp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Multipilier.");
+                        baruapdate = true;
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("Not enough money.");
+                        baruapdate = true;
                     }
                 }
                 if (option == ConsoleKey.D2)
@@ -365,11 +395,13 @@ namespace Bars
                         barsp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Bar.");
+                        baruapdate = true;
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("Not enough money.");
+                        baruapdate = true;
                     }
                 }
             }
@@ -385,7 +417,7 @@ namespace Bars
                 Console.WriteLine("Multipilier:" + levelp);
                 for (int i = 0; i < barsp; i++)
                 {
-                    decimal get = barsN[i].BarTick();
+                    BigInteger get = barsN[i].BarTick();
                     Points += get;
                     tPoints += get;
                     if (tPoints > (level * 100))
@@ -398,6 +430,8 @@ namespace Bars
             }
             while (Console.ReadKey(true).Key == ConsoleKey.S)
             {
+                baruapdate = false;
+                Thread.Sleep(500);
                 Console.Clear();
                 Console.WriteLine("Points:" + Points);
                 Console.WriteLine("Buy Upgrades:\n[1]Multipilier: " + leveln + "-Points\nCurrent:" + levelp + "\n[2]Bar: " + (barsp * 4) + "-Points\nCurrent:" + barsp);
@@ -407,15 +441,17 @@ namespace Bars
                     if (Points >= leveln)
                     {
                         Points -= leveln;
-                        leveln *= 2;
+                        leveln *= 4;
                         levelp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Multipilier.");
+                        baruapdate = true;
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("Not enough money.");
+                        baruapdate = true;
                     }
                 }
                 if (option == ConsoleKey.D2)
@@ -426,11 +462,13 @@ namespace Bars
                         barsp++;
                         Console.Clear();
                         Console.WriteLine("Purhased Bar.");
+                        baruapdate = true;
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("Not enough money.");
+                        baruapdate = true;
                     }
                 }
             }
@@ -446,7 +484,7 @@ namespace Bars
                 Console.WriteLine("Multipilier:" + levelp);
                 for (int i = 0; i < barsp; i++)
                 {
-                    decimal get = barsN[i].BarTick();
+                    BigInteger get = barsN[i].BarTick();
                     Points += get;
                     tPoints += get;
                     if (tPoints >= (level * 100))
@@ -461,7 +499,7 @@ namespace Bars
                     if (Points >= leveln)
                     {
                         Points -= leveln;
-                        leveln *= 2;
+                        leveln *= 4;
                         levelp++;
                     }
                 }
@@ -471,6 +509,8 @@ namespace Bars
         }
         internal static void WriteInventory()
         {
+            baruapdate = false;
+            Thread.Sleep(500);
             speedboost = 1;
             resourceboost = 1;
             for(int i = inventory.Length;i >= 0; i--)
@@ -491,25 +531,89 @@ namespace Bars
                 }
             }
         }
+        internal static void ThreadI(int i)
+        {
+            if (baruapdate)
+            {
+                for (int x = 0; x > 10; x++)
+                {
+                    barsI[i + x].BarTick();
+                }
+            }
+        }
+        internal static void ThreadE(int i)
+        {
+            if (baruapdate)
+            {
+                for (int x = 0; x > 10; x++)
+                {
+                    barsE[i + x].BarTick();
+                }
+            }
+        }
+        internal static void ThreadVH(int i)
+        {
+            if (baruapdate)
+            {
+                for (int x = 0; x > 10; x++)
+                {
+                    barsVH[i + x].BarTick();
+                }
+            }
+        }
+        internal static void ThreadH(int i)
+        {
+            if (baruapdate)
+            {
+                for (int x = 0; x > 10; x++)
+                {
+                    barsH[i + x].BarTick();
+                }
+            }
+        }
+        internal static void ThreadM(int i)
+        {
+            if (baruapdate)
+            {
+                for (int x = 0; x > 10; x++)
+                {
+                    barsM[i + x].BarTick();
+                }
+            }
+        }
+        internal static void ThreadN(int i)
+        {
+            if (baruapdate)
+            {
+                for (int x = 0; x>10;x++)
+                {
+                    barsN[i+x].BarTick();
+                }
+            }
+        }
+        internal static void ThreadManager()
+        {
+
+        }
     }
     internal struct BarNormal
     {
-        internal decimal i;
-        internal decimal BarTick()
+        internal BigInteger i;
+        internal BigInteger BarTick()
         {
-            if(i > 99)
+            if (i > 99)
             {
                 i = 0;
                 return Program.levelp * Program.level;
             }
-            decimal written = 0;
+            BigInteger written = 0;
             Console.Write("[");
-            for (decimal y = 0; y < i; y++)
+            for (BigInteger y = 0; y < i; y++)
             {
                 Console.Write("=");
                 written++;
             }
-            for (decimal y = (100 - written); y > 0; y--)
+            for (BigInteger y = (100 - written); y > 0; y--)
             {
                 Console.Write(" ");
             }
@@ -520,22 +624,22 @@ namespace Bars
     }
     internal struct BarMedium
     {
-        internal decimal i;
-        internal decimal BarTick()
+        internal BigInteger i;
+        internal BigInteger BarTick()
         {
             if (i >= 150)
             {
                 i = 0;
                 return Program.levelp * Program.level;
             }
-            decimal written = 0;
+            BigInteger written = 0;
             Console.Write("[");
-            for (decimal y = 0; y < i; y++)
+            for (BigInteger y = 0; y < i; y++)
             {
                 Console.Write("=");
                 written++;
             }
-            for (decimal y = (150 - written); y > 0; y--)
+            for (BigInteger y = (150 - written); y > 0; y--)
             {
                 Console.Write(" ");
             }
@@ -546,22 +650,22 @@ namespace Bars
     }
     internal struct BarHard
     {
-        internal decimal i;
-        internal decimal BarTick()
+        internal BigInteger i;
+        internal BigInteger BarTick()
         {
             if (i >= 150)
             {
                 i = 0;
                 return (Program.levelp * Program.level * Program.resourceboost) / 2;
             }
-            decimal written = 0;
+            BigInteger written = 0;
             Console.Write("[");
-            for (decimal y = 0; y < i; y++)
+            for (BigInteger y = 0; y < i; y++)
             {
                 Console.Write("=");
                 written++;
             }
-            for (decimal y = (150 - written); y > 0; y--)
+            for (BigInteger y = (150 - written); y > 0; y--)
             {
                 Console.Write(" ");
             }
@@ -572,22 +676,22 @@ namespace Bars
     }
     internal struct BarVeryHard
     {
-        internal decimal i;
-        internal decimal BarTick()
+        internal BigInteger i;
+        internal BigInteger BarTick()
         {
             if (i >= 250)
             {
                 i = 0;
                 return (Program.level * Program.resourceboost * Program.level) / 2;
             }
-            decimal written = 0;
+            BigInteger written = 0;
             Console.Write("[");
-            for (decimal y = 0; y < i; y++)
+            for (BigInteger y = 0; y < i; y++)
             {
                 Console.Write("=");
                 written++;
             }
-            for (decimal y = (250 - written); y > 0; y--)
+            for (BigInteger y = (250 - written); y > 0; y--)
             {
                 Console.Write(" ");
             }
@@ -598,22 +702,22 @@ namespace Bars
     }
     internal struct BarExtreme
     {
-        internal decimal i;
-        internal decimal BarTick()
+        internal BigInteger i;
+        internal BigInteger BarTick()
         {
             if (i >= 300)
             {
                 i = 0;
                 return (Program.levelp * Program.resourceboost * Program.level) / 4;
             }
-            decimal written = 0;
+            BigInteger written = 0;
             Console.Write("[");
-            for (decimal y = 0; y < i; y++)
+            for (BigInteger y = 0; y < i; y++)
             {
                 Console.Write("=");
                 written++;
             }
-            for (decimal y = (300 - written); y > 0; y--)
+            for (BigInteger y = (300 - written); y > 0; y--)
             {
                 Console.Write(" ");
             }
@@ -624,22 +728,22 @@ namespace Bars
     }
     internal struct BarInsane
     {
-        internal decimal i;
-        internal decimal BarTick()
+        internal BigInteger i;
+        internal BigInteger BarTick()
         {
             if (i >= 500)
             {
                 i = 0;
                 return (Program.levelp * Program.resourceboost * Program.level) / 8;
             }
-            decimal written = 0;
+            BigInteger written = 0;
             Console.Write("[");
-            for (decimal y = 0; y < i; y++)
+            for (BigInteger y = 0; y < i; y++)
             {
                 Console.Write("=");
                 written++;
             }
-            for (decimal y = (500 - written); y > 0; y--)
+            for (BigInteger y = (500 - written); y > 0; y--)
             {
                 Console.Write(" ");
             }

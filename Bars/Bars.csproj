@@ -8,6 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Bars</RootNamespace>
     <AssemblyName>Bars</AssemblyName>
+	<LangVersion>10.0</LangVersion>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
